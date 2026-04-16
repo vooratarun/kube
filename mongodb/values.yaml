@@ -1,0 +1,11 @@
+auth:
+  rootPassword: root123
+  username: appuser
+  password: app123
+  database: appdb
+
+persistence:
+  enabled: true
+  size: 2Gi
+
+architecture: standalone

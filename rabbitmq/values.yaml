@@ -1,0 +1,12 @@
+auth:
+  username: admin
+  password: admin123
+
+replicaCount: 2
+
+persistence:
+  enabled: true
+  size: 10Gi
+
+service:
+  type: ClusterIP

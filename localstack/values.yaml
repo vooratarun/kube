@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: localstack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: localstack
+  template:
+    metadata:
+      labels:
+        app: localstack
+    spec:
+      containers:
+        - name: localstack
+          image: localstack/localstack:2.3
+          ports:
+            - containerPort: 4566
+          env:
+            - name: SERVICES
+              value: "s3,sqs,sns,dynamodb,lambda,apigateway,iam,sts,cloudwatch,logs,events,secretsmanager"
+            - name: DEBUG
+              value: "1"
+            - name: DATA_DIR
+              value: "/var/lib/localstack/data"
+            - name: PERSISTENCE
+              value: "1"
+            - name: AWS_ACCESS_KEY_ID
+              value: test
+            - name: AWS_SECRET_ACCESS_KEY
+              value: test
+            - name: AWS_DEFAULT_REGION
+              value: us-east-1
+          volumeMounts:
+            - name: localstack-data
+              mountPath: /var/lib/localstack
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "1"
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+
+      volumes:
+        - name: localstack-data
+          persistentVolumeClaim:
+            claimName: localstack-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: localstack
+spec:
+  selector:
+    app: localstack
+  ports:
+    - name: edge
+      port: 4566
+      targetPort: 4566
+  type: ClusterIP

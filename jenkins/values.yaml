@@ -1,0 +1,19 @@
+controller:
+  admin:
+    username: admin
+    password: admin123
+
+  serviceType: NodePort
+
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 5Gi
+
+  podSecurityContextOverride:
+    runAsUser: 1000
+    fsGroup: 1000
+
+  containerSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
