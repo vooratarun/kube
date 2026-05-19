@@ -1,0 +1,16 @@
+kubectl port-forward svc/postgres-service 5432:5432 -n postgres 
+ kubectl port-forward svc/mysql 3306:3306
+
+kubectl port-forward svc/my-mongodb 27017:27017
+ kubectl port-forward svc/my-cluster-kafka-external-bootstrap 9092:9094 -n kafka
+kubectl port-forward svc/kafka-ui 8090:8080 -n kafka
+
+kubectl port-forward svc/elasticsearch -n elk 9200:9200  
+
+kubectl port-forward svc/kibana -n elk 5601:5601
+ kubectl port-forward svc/redis-master 6379:6379
+
+  kubectl port-forward svc/rabbitmq 5672:5672
+ kubectl port-forward svc/rabbitmq 15672:15672
+  kubectl port-forward svc/localstack 4566:4566
+   kubectl port-forward svc/keycloak 4081:8080
